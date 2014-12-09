@@ -37,6 +37,8 @@ public class RunIterator implements Iterator {
    *  These variables MUST be private.
    */
 
+	private int[][] _runLengthEncodingRawData;
+	private int _index;
 
 
 
@@ -54,8 +56,10 @@ public class RunIterator implements Iterator {
   // constructor that you want so that your RunLengthEncoding.iterator()
   // implementation can construct a RunIterator that points to the first run of
   // the encoding.
-  RunIterator() {
+  RunIterator(int[][] runLengthEncodingRawData) {
     // Your solution here.  You may add parameters to the method signature.
+	  _runLengthEncodingRawData = runLengthEncodingRawData;
+	  _index = -1;
   }
 
   /**
@@ -66,7 +70,7 @@ public class RunIterator implements Iterator {
    */
   public boolean hasNext() {
     // Replace the following line with your solution.
-    return false;
+    return _index < _runLengthEncodingRawData.length - 1;
   }
 
   /**
@@ -96,7 +100,8 @@ public class RunIterator implements Iterator {
     // call to next() will return the subsequent run.
 
     // Replace the following line with your solution.
-    return new int[4];
+	  _index++;
+    return _runLengthEncodingRawData[_index];
   }
 
   /**

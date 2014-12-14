@@ -137,9 +137,9 @@ public class RunLengthEncoding implements Iterable {
 		  int[] data = iterator.next();
 		  for (int j = 0; j < data[0]; j++) {
 			  int x = i % _width;
-			  i++;
-			  int y = ((i - i % _width) / _width);
+			  int y = (i - i % _width) / _width;
 			  image.setPixel(x, y, (short)data[1], (short)data[2], (short)data[3]);
+			  i++;
 		  }
 	  }
 	  
@@ -182,8 +182,8 @@ public class RunLengthEncoding implements Iterable {
 	  _height = image.getHeight();
 	 
 	  int[] runTemp = new int[] { 0, -1, -1, -1 };
-	  for (int y = 0; y < image.getHeight(); y++) {
-		  for (int x = 0; x < image.getWidth(); x++) {
+	  for (int y = 0; y < _height; y++) {
+		  for (int x = 0; x < _width; x++) {
 			  short red = image.getRed(x, y);
 			  short green = image.getGreen(x, y);
 			  short blue = image.getBlue(x, y);
@@ -193,7 +193,10 @@ public class RunLengthEncoding implements Iterable {
 			  else {
 				  if (runTemp[0] != 0)
 					  _runLengthPixels.addLast(runTemp);
+
 				  runTemp = new int[] { 1, red, green, blue };
+				  if (x == _width - 1 && y == _height - 1)
+					  _runLengthPixels.addLast(runTemp);
 			  }
 		  }
 	  }
@@ -230,9 +233,91 @@ public class RunLengthEncoding implements Iterable {
   public void setPixel(int x, int y, short red, short green, short blue) {
     // Your solution here, but you should probably leave the following line
     //   at the end.
-    check();
-  }
+	  int pixelIndex = y * _width + x;
+	  int i = 0, j = 0;
+	  for (; i < _runLengthPixels.size(); i++) {
+		  j += _runLengthPixels.get(i)[0];
+		  if (pixelIndex < j)
+			  break;
+	  }
+	  
+	  if (j == 0)
+		  return;
+	  
+	  int[] runLengthPixelUnit = _runLengthPixels.get(i);
+	  if (pixelAreEqual(runLengthPixelUnit, red, green, blue))
+		  return;
+	  
+	  if (runLengthPixelUnit[0] == 1) {
+		  runLengthPixelUnit[1] = red;
+		  runLengthPixelUnit[2] = green;
+		  runLengthPixelUnit[3] = blue;
+		  if (mergeToPrev(i))
+			  i--;
+		  mergeToNext(i);
+		  
+		  return;
+	  }
+	  
+	  int[] newRunLengthPixelUnit = new int[] { 1, red, green, blue };
+	  int indexStart = j - runLengthPixelUnit[0];
+	  runLengthPixelUnit[0]--;
 
+	  if (pixelIndex == indexStart) {
+		  _runLengthPixels.add(i, newRunLengthPixelUnit);
+		  mergeToPrev(i);
+		  return;
+	  }
+	  
+	  if (pixelIndex == j - 1) {
+		  _runLengthPixels.add(i + 1, newRunLengthPixelUnit);
+		  mergeToNext(i + 1);
+		  return;
+	  }
+	  
+	  runLengthPixelUnit[0] = pixelIndex - indexStart;
+	  int[] newRunLengthPixelUnit2 = new int[] {
+			  j - pixelIndex - 1, runLengthPixelUnit[1], runLengthPixelUnit[2], runLengthPixelUnit[3]
+          };
+	  _runLengthPixels.add(i + 1, newRunLengthPixelUnit2);
+	  _runLengthPixels.add(i + 1, newRunLengthPixelUnit);
+	  
+	  check();
+  }
+  
+  private boolean pixelAreEqual(int[] runLengthPixelUnit, short red, short green, short blue) {
+	  return runLengthPixelUnit[1] == red && runLengthPixelUnit[2] == green && runLengthPixelUnit[3] == blue;
+  }
+  
+  private boolean mergeToPrev(int runLengthIndex) {
+	  if (runLengthIndex > 0) {
+		  int[] runLengthPixelUnit = _runLengthPixels.get(runLengthIndex);
+		  int[] prevRunLengthPixelUnit = _runLengthPixels.get(runLengthIndex - 1);
+		  if (pixelAreEqual(runLengthPixelUnit, (short)prevRunLengthPixelUnit[1],
+				  (short)prevRunLengthPixelUnit[2], (short)prevRunLengthPixelUnit[3])) {
+			  prevRunLengthPixelUnit[0] += runLengthPixelUnit[0];
+			  _runLengthPixels.remove(runLengthIndex);
+			  return true;
+		  }
+	  }
+	  
+	  return false;
+  }
+  
+  private boolean mergeToNext(int runLengthIndex) {
+	  if (runLengthIndex < _runLengthPixels.size() - 1) {
+		  int[] runLengthPixelUnit = _runLengthPixels.get(runLengthIndex);
+		  int[] nextRunLengthPixelUnit = _runLengthPixels.get(runLengthIndex + 1);
+		  if (pixelAreEqual(runLengthPixelUnit, (short)nextRunLengthPixelUnit[1],
+				  (short)nextRunLengthPixelUnit[2], (short)nextRunLengthPixelUnit[3])) {
+			  nextRunLengthPixelUnit[0] += runLengthPixelUnit[0];
+			  _runLengthPixels.remove(runLengthIndex);
+			  return true;
+		  }
+	  }
+	  
+	  return false;
+  }
 
   /**
    * TEST CODE:  YOU DO NOT NEED TO FILL IN ANY METHODS BELOW THIS POINT.

@@ -134,12 +134,12 @@ public class PixImage {
   public String toString() {
     // Replace the following line with your solution.
 	  String s = "";
-	  for (int i = 0; i < _width; i++) {
+	  for (int i = 0; i < _height; i++) {
 		  String l = "";
-		  for (int j = 0; j < _height; j++) {
+		  for (int j = 0; j < _width; j++) {
 			  if (l != "")
 				  l = l + ", ";
-			  l = l + _pixels[i][j].toString();
+			  l = l + _pixels[j][i].toString();
 		  }
 		  s = s + l + "\n";
 	  }

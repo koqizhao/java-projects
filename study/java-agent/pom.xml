@@ -34,5 +34,25 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>${maven-jar-plugin.version}</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>io.study.java_agent.Program</mainClass>
+                        </manifest>
+                        <manifestEntries>
+                            <Premain-Class>io.study.java_agent.LoadAgent</Premain-Class>
+                            <Agent-Class>io.study.java_agent.RuntimeAgent</Agent-Class>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

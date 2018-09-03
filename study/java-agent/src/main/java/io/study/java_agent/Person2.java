@@ -1,4 +1,4 @@
-package io.study.dynamicproxy;
+package io.study.java_agent;
 
 /**
  * @author koqizhao

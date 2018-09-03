@@ -10,10 +10,10 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>io.study.dynamic-proxy</artifactId>
+    <artifactId>io.study.java-agent</artifactId>
     <packaging>jar</packaging>
 
-    <name>dynamic-proxy</name>
+    <name>java-agent</name>
 
     <dependencies>
         <dependency>
@@ -27,10 +27,6 @@
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>cglib</groupId>
-            <artifactId>cglib</artifactId>
         </dependency>
         <dependency>
             <groupId>junit</groupId>

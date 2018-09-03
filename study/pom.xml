@@ -26,6 +26,7 @@
     <modules>
         <module>network</module>
         <module>dynamic-proxy</module>
+        <module>java-agent</module>
     </modules>
 
     <dependencyManagement>

@@ -24,6 +24,7 @@
 
     <modules>
         <module>network</module>
+        <module>dynamic-proxy</module>
     </modules>
 
     <dependencyManagement>

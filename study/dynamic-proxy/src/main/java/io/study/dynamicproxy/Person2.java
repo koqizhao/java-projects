@@ -5,8 +5,8 @@ package io.study.dynamicproxy;
  *
  * Sep 3, 2018
  */
-public interface Person {
+public interface Person2 {
 
-    void doSomeThing();
+    void doSomeThing2();
 
 }

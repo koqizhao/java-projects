@@ -10,7 +10,8 @@ import java.lang.instrument.Instrumentation;
 public class RuntimeAgent {
 
     public static void agentmain(String agentArgs, Instrumentation inst) {
-        System.out.println("runtime agent started");
+        System.out.println("runtime agent started, agentArgs: " + agentArgs);
+        Program.setInstrumentation(inst);
     }
 
 }

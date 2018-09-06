@@ -1,13 +1,6 @@
 package io.study.java_agent;
 
-import java.io.IOException;
-import java.lang.management.ManagementFactory;
-import java.lang.management.RuntimeMXBean;
-
-import com.sun.tools.attach.AgentInitializationException;
-import com.sun.tools.attach.AgentLoadException;
-import com.sun.tools.attach.AttachNotSupportedException;
-import com.sun.tools.attach.VirtualMachine;
+import java.lang.instrument.Instrumentation;
 
 /**
  * @author koqizhao
@@ -16,25 +9,28 @@ import com.sun.tools.attach.VirtualMachine;
  */
 public class Program {
 
-    public static void main(String[] args) throws InterruptedException, AttachNotSupportedException, IOException,
-            AgentLoadException, AgentInitializationException {
-        System.out.println("Hello, world!");
+    private static volatile Instrumentation _instrumentation;
 
-        int processID = getProcessID();
-        System.out.println(processID);
-        VirtualMachine vm = VirtualMachine.attach(String.valueOf(processID));
-        vm.loadAgent(
-                "/home/koqizhao/Projects/koqizhao/java-projects/study/java-agent/target/io.study.java-agent-0.0.1.jar");
-        vm.detach();
+    public static void main(String[] args) throws InterruptedException {
+        if (!instrument())
+            return;
 
         while (true) {
             Thread.sleep(1000);
+            System.out.println(_instrumentation.isModifiableClass(Program.class));
         }
     }
 
-    public static final int getProcessID() {
-        RuntimeMXBean runtimeMXBean = ManagementFactory.getRuntimeMXBean();
-        System.out.println(runtimeMXBean.getName());
-        return Integer.valueOf(runtimeMXBean.getName().split("@")[0]);
+    public static boolean instrument() {
+        /*
+        return JavaAgentUtil.loadAgent(
+                "/home/koqizhao/Projects/koqizhao/java-projects/study/java-agent/target/io.study.java-agent-0.0.1.jar");
+        */
+
+        return JavaAgentUtil.loadAgent(RuntimeAgent.class, "test");
+    }
+
+    public static void setInstrumentation(Instrumentation instrumentation) {
+        _instrumentation = instrumentation;
     }
 }

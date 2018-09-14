@@ -56,6 +56,23 @@ THE POSSIBILITY OF SUCH DAMAGE.
             <artifactId>jmh-generator-annprocess</artifactId>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>com.carrotsearch</groupId>
+            <artifactId>hppc</artifactId>
+            <type>bundle</type>
+        </dependency>
+        <dependency>
+            <groupId>org.javolution</groupId>
+            <artifactId>javolution-core-java</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.romix</groupId>
+            <artifactId>java-concurrent-hash-trie-map</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.agrona</groupId>
+            <artifactId>agrona</artifactId>
+        </dependency>
     </dependencies>
 
     <properties>

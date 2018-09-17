@@ -1,4 +1,4 @@
-package io.study.java_agent;
+package io.study.java_agent.model;
 
 /**
  * @author koqizhao

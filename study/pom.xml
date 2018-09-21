@@ -26,6 +26,7 @@
         <asm.version>6.2.1</asm.version>
         <javassist.version>3.23.1-GA</javassist.version>
         <junit.version>4.12</junit.version>
+        <jmxtools.version>1.2.1</jmxtools.version>
         <maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
         <maven-jar-plugin.version>3.1.0</maven-jar-plugin.version>
         <maven-source-plugin.version>3.0.1</maven-source-plugin.version>
@@ -36,6 +37,7 @@
         <module>dynamic-proxy</module>
         <module>java-agent</module>
         <module>jmh</module>
+        <module>jmx</module>
     </modules>
 
     <dependencyManagement>
@@ -119,6 +121,13 @@
                 <artifactId>javassist</artifactId>
                 <version>${javassist.version}</version>
                 <type>bundle</type>
+            </dependency>
+            <dependency>
+                <groupId>com.sun.jdmk</groupId>
+                <artifactId>jmxtools</artifactId>
+                <version>${jmxtools.version}</version>
+                <scope>system</scope>
+                <systemPath>/home/koqizhao/Lib/java/jmx-1_2_1-bin/lib/jmxtools.jar</systemPath>
             </dependency>
             <dependency>
                 <groupId>junit</groupId>

@@ -106,8 +106,14 @@ public class ChatRobot implements Closeable {
 
     @Override
     public void close() throws IOException {
-        _chatterThreadPool.close();
-        _serverSocket.close();
+        shutdown();
+
+        if (_chatterThreadPool != null)
+            _chatterThreadPool.close();
+
+        if (_serverSocket != null)
+            _serverSocket.close();
+
         System.out.println("ChatRobot has been closed!");
     }
 

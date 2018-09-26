@@ -31,28 +31,30 @@ public class ChatRobot implements Closeable {
         }
     }
 
+    private int _port;
     private ServerSocket _serverSocket;
     private AutoScaleThreadPool _chatterThreadPool;
 
     private AtomicBoolean _isRunning;
 
-    public ChatRobot(int port) throws IOException {
-        _serverSocket = new ServerSocket(port);
+    public ChatRobot(int port) {
+        _port = port;
+        _isRunning = new AtomicBoolean();
+    }
+
+    public void start() throws IOException {
+        if (!_isRunning.compareAndSet(false, true)) {
+            System.out.println("ChatRobot has been started!");
+            return;
+        }
+
+        _serverSocket = new ServerSocket(_port);
         _serverSocket.setSoTimeout(10 * 1000);
 
         AutoScaleThreadPoolConfig config = ThreadPools.newAutoScaleThreadPoolConfigBuilder()
                 .setMaxIdleTime(TimeUnit.SECONDS.toMillis(10)).setMinSize(5).setMaxSize(100).setQueueCapacity(100)
                 .setScaleFactor(5).build();
         _chatterThreadPool = ThreadPools.newAutoScaleThreadPool(config);
-
-        _isRunning = new AtomicBoolean();
-    }
-
-    public void start() {
-        if (!_isRunning.compareAndSet(false, true)) {
-            System.out.println("ChatRobot has been started!");
-            return;
-        }
 
         System.out.println("ChatRobot is serving!");
         while (_isRunning.get()) {
@@ -93,13 +95,19 @@ public class ChatRobot implements Closeable {
             }
         } catch (Exception ex) {
             System.out.println("exception happened in chatting: " + ex);
+        } finally {
+            try {
+                socket.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
-
     }
 
     @Override
     public void close() throws IOException {
         _chatterThreadPool.close();
+        _serverSocket.close();
         System.out.println("ChatRobot has been closed!");
     }
 

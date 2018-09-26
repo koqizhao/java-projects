@@ -33,7 +33,7 @@ public class SelectorDemo {
         final int DEFAULT_PORT = 5555;
         try (Selector selector = Selector.open();
                 ServerSocketChannel serverSocketChannel = ServerSocketChannel.open()) {
-            if (!selector.isOpen() || !selector.isOpen())
+            if (!selector.isOpen() || !serverSocketChannel.isOpen())
                 return;
 
             serverSocketChannel.configureBlocking(false);

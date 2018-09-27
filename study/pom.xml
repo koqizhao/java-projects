@@ -28,6 +28,7 @@
         <junit.version>4.12</junit.version>
         <jmxtools.version>1.2.1</jmxtools.version>
         <spring-boot.version>2.0.5.RELEASE</spring-boot.version>
+        <netty.version>4.1.29.Final</netty.version>
         <maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
         <maven-jar-plugin.version>3.1.0</maven-jar-plugin.version>
         <maven-source-plugin.version>3.0.1</maven-source-plugin.version>
@@ -137,6 +138,11 @@
                 <version>${spring-boot.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty-all</artifactId>
+                <version>${netty.version}</version>
             </dependency>
             <dependency>
                 <groupId>junit</groupId>

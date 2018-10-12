@@ -6,6 +6,7 @@ import java.nio.charset.Charset;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.buffer.ByteBuf;
+import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.channel.ChannelInitializer;
@@ -60,8 +61,9 @@ public class EchoServer implements Closeable {
                         });
                     }
                 });
-        _serverBootstrap.bind().sync().channel().closeFuture().sync();
+        ChannelFuture future = _serverBootstrap.bind().sync();
         System.out.println("server started");
+        future.channel().closeFuture().sync();
     }
 
     @Override

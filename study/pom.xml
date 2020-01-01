@@ -29,6 +29,7 @@
         <jmxtools.version>1.2.1</jmxtools.version>
         <spring-boot.version>2.0.5.RELEASE</spring-boot.version>
         <netty.version>4.1.29.Final</netty.version>
+        <mybatis.version>3.5.3</mybatis.version>
         <maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
         <maven-jar-plugin.version>3.1.0</maven-jar-plugin.version>
         <maven-source-plugin.version>3.0.1</maven-source-plugin.version>
@@ -41,7 +42,17 @@
         <module>jmh</module>
         <module>jmx</module>
         <module>spring-boot</module>
+        <module>mybatis</module>
     </modules>
+
+    <repositories>
+        <!-- resolve jmxtools dep -->
+        <repository>
+            <id>dist.wso2.org/maven2</id>
+            <name>wso2.org Maven Repository</name>
+            <url>http://dist.wso2.org/maven2/</url>
+        </repository>
+    </repositories>
 
     <dependencyManagement>
         <dependencies>
@@ -129,8 +140,6 @@
                 <groupId>com.sun.jdmk</groupId>
                 <artifactId>jmxtools</artifactId>
                 <version>${jmxtools.version}</version>
-                <scope>system</scope>
-                <systemPath>/home/koqizhao/Lib/java/jmx-1_2_1-bin/lib/jmxtools.jar</systemPath>
             </dependency>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
@@ -143,6 +152,11 @@
                 <groupId>io.netty</groupId>
                 <artifactId>netty-all</artifactId>
                 <version>${netty.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis</artifactId>
+                <version>${mybatis.version}</version>
             </dependency>
             <dependency>
                 <groupId>junit</groupId>

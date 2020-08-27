@@ -19,6 +19,7 @@
         <spring-boot.version>2.3.0.RELEASE</spring-boot.version>
         <spring-cloud.version>Hoxton.SR4</spring-cloud.version>
         <dubbo.version>2.7.7</dubbo.version>
+        <alibaba-dubbo.version>2.7.7</alibaba-dubbo.version>
         <log4j.version>2.13.3</log4j.version>
         <maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
         <maven-jar-plugin.version>3.1.0</maven-jar-plugin.version>
@@ -73,6 +74,11 @@
                 <version>${dubbo.version}</version>
                 <type>pom</type>
             </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>dubbo-registry-nacos</artifactId>
+                <version>${alibaba-dubbo.version}</version>
+            </dependency>  
             <dependency>
                 <groupId>org.apache.logging.log4j</groupId>
                 <artifactId>log4j-api</artifactId>

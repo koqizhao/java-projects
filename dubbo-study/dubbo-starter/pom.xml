@@ -23,6 +23,14 @@
 			<artifactId>slf4j-api</artifactId>
 		</dependency>
 		<dependency>
+            <groupId>org.mydotey.scf</groupId>
+            <artifactId>scf-core</artifactId>
+        </dependency>
+		<dependency>
+			<groupId>org.mydotey.scf</groupId>
+			<artifactId>scf-simple</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>org.apache.dubbo</groupId>
 			<artifactId>dubbo</artifactId>
 		</dependency>
@@ -31,6 +39,10 @@
 			<artifactId>dubbo-dependencies-zookeeper</artifactId>
 			<type>pom</type>
 		</dependency>
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>dubbo-registry-nacos</artifactId>
+		</dependency>  
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>

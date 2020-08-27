@@ -9,22 +9,22 @@ import io.study.dubbo.starter.api.HelloService;
 
 public class Client {
 
-    private String _registryProtocol;
+    private RegistryConfig _registryConfig;
     
-    public Client(String registryProtocol) {
-        _registryProtocol = registryProtocol;
+    public Client(RegistryConfig registryConfig) {
+        _registryConfig = registryConfig;
     }
 
     @SuppressWarnings("deprecation")
     public void invoke() {
         ReferenceConfig<HelloService> reference = new ReferenceConfig<>();
         reference.setApplication(new ApplicationConfig("first-dubbo-consumer"));
-        reference.setRegistry(new RegistryConfig(_registryProtocol));
+        reference.setRegistry(_registryConfig);
         reference.setInterface(HelloService.class);
         reference.setMonitor(new MonitorConfig());
         HelloService service = reference.get();
         String message = service.hello("Dubbo");
-        System.out.println(message);
+        //System.out.println(message);
     }
 
 }

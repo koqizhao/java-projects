@@ -11,17 +11,17 @@ import io.study.dubbo.starter.service.HelloServiceImpl;
 
 public class Server {
 
-    private String _registryProtocol;
+    private RegistryConfig _registryConfig;
     
-    public Server(String registryProtocol) {
-        _registryProtocol = registryProtocol;
+    public Server(RegistryConfig registryConfig) {
+        _registryConfig = registryConfig;
     }
 
     @SuppressWarnings("deprecation")
     public void start() throws Exception {
         ServiceConfig<HelloService> service = new ServiceConfig<>();
         service.setApplication(new ApplicationConfig("first-dubbo-provider"));
-        service.setRegistry(new RegistryConfig(_registryProtocol));
+        service.setRegistry(_registryConfig);
         service.setInterface(HelloService.class);
         service.setRef(new HelloServiceImpl());
         service.export();

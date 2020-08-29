@@ -78,6 +78,16 @@
                 <groupId>com.alibaba</groupId>
                 <artifactId>dubbo-registry-nacos</artifactId>
                 <version>${alibaba-dubbo.version}</version>
+                <exclusions>  
+                    <exclusion> 
+                        <groupId>org.apache.dubbo</groupId>
+                        <artifactId>dubbo-common</artifactId>
+                    </exclusion> 
+                    <exclusion> 
+                        <groupId>org.apache.dubbo</groupId>
+                        <artifactId>dubbo-registry-api</artifactId>
+                    </exclusion> 
+                </exclusions>  
             </dependency>  
             <dependency>
                 <groupId>org.apache.logging.log4j</groupId>

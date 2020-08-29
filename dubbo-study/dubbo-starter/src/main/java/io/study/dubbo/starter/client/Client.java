@@ -1,7 +1,5 @@
 package io.study.dubbo.starter.client;
 
-import org.apache.dubbo.config.ApplicationConfig;
-import org.apache.dubbo.config.MonitorConfig;
 import org.apache.dubbo.config.ReferenceConfig;
 import org.apache.dubbo.config.RegistryConfig;
 
@@ -18,12 +16,14 @@ public class Client {
     @SuppressWarnings("deprecation")
     public void invoke() {
         ReferenceConfig<HelloService> reference = new ReferenceConfig<>();
-        reference.setApplication(new ApplicationConfig("first-dubbo-consumer"));
+        //reference.setApplication(new ApplicationConfig("first-dubbo-consumer"));
+        //reference.setMonitor(new MonitorConfig());
         reference.setRegistry(_registryConfig);
         reference.setInterface(HelloService.class);
-        reference.setMonitor(new MonitorConfig());
+        reference.setInjvm(false);
         HelloService service = reference.get();
-        String message = service.hello("Dubbo");
+        service.hello("Dubbo");
+        //String message = service.hello("Dubbo");
         //System.out.println(message);
     }
 

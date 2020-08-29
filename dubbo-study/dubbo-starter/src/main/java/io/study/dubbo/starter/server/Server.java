@@ -2,7 +2,6 @@ package io.study.dubbo.starter.server;
 
 import java.util.concurrent.CountDownLatch;
 
-import org.apache.dubbo.config.ApplicationConfig;
 import org.apache.dubbo.config.RegistryConfig;
 import org.apache.dubbo.config.ServiceConfig;
 
@@ -17,10 +16,9 @@ public class Server {
         _registryConfig = registryConfig;
     }
 
-    @SuppressWarnings("deprecation")
     public void start() throws Exception {
         ServiceConfig<HelloService> service = new ServiceConfig<>();
-        service.setApplication(new ApplicationConfig("first-dubbo-provider"));
+        //service.setApplication(new ApplicationConfig("first-dubbo-provider"));
         service.setRegistry(_registryConfig);
         service.setInterface(HelloService.class);
         service.setRef(new HelloServiceImpl());

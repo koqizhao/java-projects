@@ -2,6 +2,8 @@ package io.study.dubbo.starter;
 
 import java.util.concurrent.CountDownLatch;
 
+import org.apache.dubbo.config.ApplicationConfig;
+import org.apache.dubbo.config.MonitorConfig;
 import org.apache.dubbo.config.RegistryConfig;
 import org.mydotey.scf.ConfigurationManager;
 import org.mydotey.scf.ConfigurationManagerConfig;
@@ -22,6 +24,10 @@ public class App {
 
     public static void main(String[] args) throws Exception {
         initConfig();
+
+        // 1 app 1 app config
+        new ApplicationConfig("first-dubbo-app").addIntoConfigManager();
+        new MonitorConfig().addIntoConfigManager();
 
         initRegistryConfig();
         startServer();

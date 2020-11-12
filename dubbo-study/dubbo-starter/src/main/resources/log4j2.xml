@@ -6,12 +6,12 @@
   <Appenders>
     <Appender type="Console" name="Console">
       <Layout type="PatternLayout">
-        <Pattern>%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n</Pattern>
+        <Pattern>%d{HH:mm:ss.SSS} [dubbo-starter] [%t] %-5level %logger{36} - %msg%n</Pattern>
 	  </Layout>
     </Appender>
     <Appender type="File" name="File" fileName="${filename}">
       <Layout type="PatternLayout">
-        <Pattern>%d %p %C{1.} [%t] %m%n</Pattern>
+        <Pattern>%d %p %C{1.} [dubbo-starter] [%t] %m%n</Pattern>
       </Layout>
     </Appender>
   </Appenders>

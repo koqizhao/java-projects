@@ -1,0 +1,6 @@
+
+# 本文件在application.properties之前加载，但可以被application.properties覆盖
+
+spring:
+  application:
+    name: eureka

@@ -30,6 +30,7 @@
         <spring-boot.version>2.0.5.RELEASE</spring-boot.version>
         <netty.version>4.1.29.Final</netty.version>
         <mybatis.version>3.5.3</mybatis.version>
+        <elasticjob.version>3.0.0-beta</elasticjob.version>
         <maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
         <maven-jar-plugin.version>3.1.0</maven-jar-plugin.version>
         <maven-source-plugin.version>3.0.1</maven-source-plugin.version>
@@ -43,6 +44,7 @@
         <module>jmx</module>
         <module>spring-boot</module>
         <module>mybatis</module>
+        <module>elasticjob</module>
     </modules>
 
     <repositories>
@@ -157,6 +159,11 @@
                 <groupId>org.mybatis</groupId>
                 <artifactId>mybatis</artifactId>
                 <version>${mybatis.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.shardingsphere.elasticjob</groupId>
+                <artifactId>elasticjob-lite-core</artifactId>
+                <version>${elasticjob.version}</version>
             </dependency>
             <dependency>
                 <groupId>junit</groupId>

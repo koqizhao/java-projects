@@ -18,7 +18,7 @@
         <junit.version>4.12</junit.version>
         <spring-boot.version>2.3.0.RELEASE</spring-boot.version>
         <spring-cloud.version>Hoxton.SR4</spring-cloud.version>
-        <dubbo.version>2.7.7</dubbo.version>
+        <dubbo.version>2.7.13</dubbo.version>
         <alibaba-dubbo.version>2.7.7</alibaba-dubbo.version>
         <log4j.version>2.13.3</log4j.version>
         <soul.version>2.2.0</soul.version>

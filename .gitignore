@@ -1,6 +1,7 @@
 .project
 .classpath
 .settings/
+target/
 bin/
 .gradle
 .metadata
@@ -29,3 +30,5 @@ hs_err_pid*
 
 .factorypath
 
+hw01/.project
+perf-demo/arthas-output/r3.jfr

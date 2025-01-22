@@ -23,15 +23,16 @@
         <javolution.version>6.0.0</javolution.version>
         <trie-map.version>0.2.23</trie-map.version>
         <agrona.version>0.9.24</agrona.version>
-        <asm.version>6.2.1</asm.version>
+        <asm.version>9.7.1</asm.version>
         <javassist.version>3.23.1-GA</javassist.version>
-        <junit.version>4.12</junit.version>
+        <junit.version>4.13.2</junit.version>
         <jmxtools.version>1.2.1</jmxtools.version>
         <spring-boot.version>2.0.5.RELEASE</spring-boot.version>
         <netty.version>4.1.29.Final</netty.version>
         <mybatis.version>3.5.3</mybatis.version>
         <elasticjob.version>3.0.0-beta</elasticjob.version>
         <rocketmq.version>4.3.1</rocketmq.version>
+        <byte-buddy.version>1.16.1</byte-buddy.version>
         <maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
         <maven-jar-plugin.version>3.1.0</maven-jar-plugin.version>
         <maven-source-plugin.version>3.0.1</maven-source-plugin.version>
@@ -47,6 +48,7 @@
         <module>mybatis</module>
         <module>elasticjob</module>
         <module>rocketmq</module>
+        <module>classloader</module>
     </modules>
 
     <repositories>
@@ -54,7 +56,7 @@
         <repository>
             <id>dist.wso2.org/maven2</id>
             <name>wso2.org Maven Repository</name>
-            <url>http://dist.wso2.org/maven2/</url>
+            <url>https://dist.wso2.org/maven2/</url>
         </repository>
     </repositories>
 
@@ -171,6 +173,16 @@
                 <groupId>org.apache.rocketmq</groupId>
                 <artifactId>rocketmq-client</artifactId>
                 <version>${rocketmq.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>net.bytebuddy</groupId>
+                <artifactId>byte-buddy</artifactId>
+                <version>${byte-buddy.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>net.bytebuddy</groupId>
+                <artifactId>byte-buddy-agent</artifactId>
+                <version>${byte-buddy.version}</version>
             </dependency>
             <dependency>
                 <groupId>junit</groupId>

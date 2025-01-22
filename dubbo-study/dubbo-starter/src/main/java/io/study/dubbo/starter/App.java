@@ -31,7 +31,7 @@ public class App {
 
         initRegistryConfig();
         startServer();
-        startClient();
+        //startClient();
 
         new CountDownLatch(1).await();
     }
@@ -47,13 +47,13 @@ public class App {
     }
     
     private static void initRegistryConfig() {
+        /*
         String zookeeperAddress = properties.getStringPropertyValue("zookeeper.address");
         registryConfig = new RegistryConfig(zookeeperAddress, "zookeeper");
-
-        /*
-        String nacosAddress = properties.getStringPropertyValue("nacos.address");
-        registryConfig = new RegistryConfig(zookeeperAddress, "nacos");
         */
+
+        String nacosAddress = properties.getStringPropertyValue("nacos.address");
+        registryConfig = new RegistryConfig(nacosAddress, "nacos");
     }
 
     public static void startServer() throws Exception {

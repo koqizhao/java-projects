@@ -34,10 +34,12 @@
             <groupId>org.apache.dubbo</groupId>
             <artifactId>dubbo-configcenter-apollo</artifactId>
         </dependency>
+        <!--
 		<dependency>
 			<groupId>org.dromara</groupId>
 			<artifactId>soul-spring-boot-starter-client-apache-dubbo</artifactId>
 		</dependency>
+	  -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>

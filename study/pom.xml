@@ -50,6 +50,7 @@
         <module>elasticjob</module>
         <module>rocketmq</module>
         <module>classloader</module>
+        <module>byte-buddy</module>
     </modules>
 
     <repositories>

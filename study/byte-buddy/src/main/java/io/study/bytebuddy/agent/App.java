@@ -6,17 +6,13 @@ import net.bytebuddy.agent.builder.AgentBuilder;
 import net.bytebuddy.agent.builder.ResettableClassFileTransformer;
 import net.bytebuddy.asm.Advice;
 import net.bytebuddy.description.type.TypeDescription;
-import net.bytebuddy.dynamic.ClassFileLocator;
 import net.bytebuddy.dynamic.DynamicType;
 import net.bytebuddy.dynamic.loading.ClassLoadingStrategy;
 import net.bytebuddy.dynamic.loading.ClassReloadingStrategy;
-import net.bytebuddy.dynamic.scaffold.TypeValidation;
-import net.bytebuddy.dynamic.scaffold.inline.MethodNameTransformer;
 import net.bytebuddy.implementation.MethodDelegation;
 import net.bytebuddy.utility.JavaModule;
 
 import java.lang.instrument.Instrumentation;
-import java.security.ProtectionDomain;
 import java.util.Map;
 import java.util.Set;
 
@@ -31,22 +27,6 @@ public class App {
         var b2 = instrumentation.isRedefineClassesSupported();
         System.out.printf("isRetransformClassesSupported: %s, isRedefineClassesSupported: %s\n", b1, b2);
         System.out.println();
-
-        /*
-        var transformer = new AgentBuilder.Default()
-                //.type(is(TestClass.class))
-                .type(named("io.study.bytebuddy.agent.TestClass"))
-                .transform(new TestTransformer())
-                .with(new Listener())
-                //.with(AgentBuilder.RedefinitionStrategy.RETRANSFORMATION)
-                .with(new InstallationListener())
-                //.makeRaw();
-                .installOn(instrumentation);
-        //instrumentation.addTransformer(transformer, true);
-        //instrumentation.retransformClasses(TestClass.class);
-        System.out.println("clazz: " + TestClass.class);
-        System.out.println();
-        */
 
         var clazz = TestClass.class;
         System.out.println("clazz: " + clazz);
@@ -82,11 +62,15 @@ public class App {
         obj2.sayHello();
         System.out.println();
 
-        new AgentBuilder.Default(new ByteBuddy().with(TypeValidation.of(false)))
+        new AgentBuilder.Default()
                 .type(is(TestClass.class))
-                .transform(new TestTransformer())
-                .with(new Listener())
+                //.type(named("io.study.bytebuddy.agent.TestClass"))
+                //.transform(new TestTransformer())
+                .transform(new TestTransformer2())
                 .with(AgentBuilder.RedefinitionStrategy.RETRANSFORMATION)
+                .with(AgentBuilder.InitializationStrategy.NoOp.INSTANCE)
+                .with(AgentBuilder.TypeStrategy.Default.REDEFINE)
+                .with(new Listener())
                 .with(new InstallationListener())
                 .installOn(instrumentation);
         System.out.println("clazz4: " + TestClass.class);

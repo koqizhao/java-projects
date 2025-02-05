@@ -78,7 +78,7 @@ public class App {
         System.out.println();
     }
 
-    private static class Listener implements AgentBuilder.Listener {
+    public static class Listener implements AgentBuilder.Listener {
 
         @Override
         public void onDiscovery(String s, ClassLoader classLoader, JavaModule javaModule, boolean b) {
@@ -106,7 +106,7 @@ public class App {
         }
     }
 
-    private static class InstallationListener implements AgentBuilder.InstallationListener {
+    public static class InstallationListener implements AgentBuilder.InstallationListener {
 
         @Override
         public void onBeforeInstall(Instrumentation instrumentation, ResettableClassFileTransformer resettableClassFileTransformer) {

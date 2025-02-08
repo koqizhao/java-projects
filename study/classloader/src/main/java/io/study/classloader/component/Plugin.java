@@ -28,11 +28,8 @@ public class Plugin implements AutoCloseable {
 
     private synchronized Class<Component> getComponentClass() throws ClassNotFoundException {
         if (componentClass == null) {
-            if (clsLoader == null) {
-                clsLoader = new WeakReference<>(new PluginClassLoader(name, findJars()));
-            }
             componentClass = new WeakReference<>(
-                    clsLoader.get().loadClass(componentClassName).asSubclass(Component.class));
+                getPluginClassLoader().loadClass(componentClassName).asSubclass(Component.class));
         }
         return componentClass.get();
     }
@@ -65,7 +62,7 @@ public class Plugin implements AutoCloseable {
         return urls.toArray(new URL[0]);
     }
 
-    public Component getComponent() throws ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {
+    public synchronized Component getComponent() throws ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {
         if (unloaded())
             reset();
         if (closed.get())
